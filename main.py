@@ -34,6 +34,7 @@ class SheetBuilder:
         pprint.pp(self.plo_data)
         pprint.pp(self.clo_data)
     
+    # Helper functions
     def get_plo_count(self, program_id: str) -> int:
         if program_id in self.plo_data.keys():
             count = 0
@@ -56,6 +57,8 @@ class SheetBuilder:
         if course_id in self.clo_data.keys():
             pprint.pp(self.clo_data[course_id])
 
+    # Generator functions
+    # TODO: make it less incomprehensible
     def write_plo_contents(self, program_id: str):
         plo_count = self.get_plo_count(program_id)
         plo_numbers = ["".join([program_id, ".", str(n)]) for n in range(1, plo_count + 1)]
@@ -70,6 +73,8 @@ class SheetBuilder:
             self.df.insert(1+i, i, [None for _ in range(0, 11)])
         print(self.df)
     
+    # Convert dataframe to Excel file
+    # TODO: remove index col, fix formatting a bit
     def export(self):
         self.df.to_excel("generated.xlsx")
 
